@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Containers\Common\Subscribe\Actions;
+namespace App\Containers\Common\Auth\Actions;
 
 class TWAAuth
 {

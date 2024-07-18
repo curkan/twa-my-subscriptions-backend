@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Containers\Common\Subscribe\Middlewares;
+namespace App\Containers\Common\Auth\Middlewares;
 
-use App\Containers\Common\Subscribe\Actions\TWAAuth;
-use App\Containers\Common\Subscribe\Data\DTO\User;
+use App\Containers\Common\Auth\Actions\TWAAuth;
+use App\Containers\Common\Auth\Data\DTO\User;
 use App\Ship\Parents\Models\User as ModelsUser;
 use Closure;
 use Illuminate\Auth\AuthenticationException;

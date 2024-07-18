@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Containers\Common\Subscribe\Data\DTO;
+namespace App\Containers\Common\Auth\Data\DTO;
 
 class User
 {
