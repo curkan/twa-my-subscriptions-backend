@@ -4,6 +4,7 @@
 /public/storage
 /storage/*.key
 /storage/sensetive/*.key
+/storage/logs/
 /vendor
 .env
 .env.backup

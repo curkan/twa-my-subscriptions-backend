@@ -16,21 +16,11 @@ return new class() extends Migration {
     {
         Schema::create('users', function (Blueprint $table): void {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('username')->unique()->nullable();
-            $table->string('email')->unique();
-            $table->string('phone')->unique()->nullable();
-            $table->boolean('phone_verified')->default(false);
-            $table->boolean('email_verified')->default(false);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->timestamp('last_login_at')->nullable();
-            $table->string('picture')->nullable();
-            $table->text('biography')->nullable();
-            $table->integer('status')->default(1);
-            $table->string('ip_register');
-            $table->string('seller_key')->nullable();
-            $table->rememberToken();
+            $table->string('language_code')->nullable();
+            $table->boolean('allows_write_to_pm');
             $table->timestamps();
             $table->softDeletes();
         });

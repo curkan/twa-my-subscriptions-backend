@@ -4,20 +4,24 @@ declare(strict_types=1);
 
 namespace App\Containers\Common\Subscribe\Actions;
 
-class Validate
+class TWAAuth
 {
-    /**
-     * validate initData to ensure that it is from Telegram.
-     *
-     * @param string $botToken your bot token
-     * @param string $initData init data from Telegram (`Telegram.WebApp.initData`)
-     *
-     * @return bool return true if its from Telegram otherwise false
-     */
-    public static function isSafe(string $botToken, string $initData): bool
+    public string $initData;
+    public string $token;
+
+    public function __construct(string $initData)
     {
-        [$checksum, $sortedInitData] = self::convertInitData($initData);
-        $secretKey                   = hash_hmac('sha256', $botToken, 'WebAppData', true);
+        $this->initData = $initData;
+        $this->token = env('BOT_TOKEN', '');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid(): bool
+    {
+        [$checksum, $sortedInitData] = self::convertInitData($this->initData);
+        $secretKey                   = hash_hmac('sha256', $this->token, 'WebAppData', true);
         $hash                        = bin2hex(hash_hmac('sha256', $sortedInitData, $secretKey, true));
 
         return 0 === strcmp($hash, $checksum);
@@ -30,7 +34,7 @@ class Validate
      *
      * @return string[] return hash and sorted init data
      */
-    private static function convertInitData(string $initData): array
+    public function convertInitData(string $initData): array
     {
         $initDataArray = explode('&', rawurldecode($initData));
         $needle        = 'hash=';
@@ -46,5 +50,10 @@ class Validate
         sort($initDataArray);
 
         return [$hash, implode("\n", $initDataArray)];
+    }
+
+    public function toArray(): array
+    {
+        return [];
     }
 }
