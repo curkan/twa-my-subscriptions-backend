@@ -6,7 +6,6 @@ namespace App\Containers\Common\Auth\UI\Api\Controllers;
 
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 final class MeController extends ApiController
@@ -23,13 +22,11 @@ final class MeController extends ApiController
      * )
      *
      * @return JsonResponse
-     * @param Request $request
      */
     public function __invoke(): JsonResponse
     {
         return response_json('data', [
             'id' => Auth::user()->getKey(),
-            'first_name' => Auth::user()->first_name,
         ], []);
     }
 }
