@@ -12,7 +12,7 @@ class TWAAuth
     public function __construct(string $initData)
     {
         $this->initData = $initData;
-        $this->token = env('BOT_TOKEN', '');
+        $this->token = config('bot.bot_token');
     }
 
     /**
