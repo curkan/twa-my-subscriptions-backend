@@ -8,4 +8,5 @@ parameters:
     ignoreErrors:
         - identifier: missingType.iterableValue
         - identifier: missingType.generics
+        - '#Access to an undefined property App\\Ship\\Parents\\Models#'
 

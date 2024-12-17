@@ -34,6 +34,32 @@ final class SubscriptionsController extends ApiController
     }
 
     /**
+     * @return JsonResponse
+     * @param mixed $id
+     */
+    public function show($id): JsonResponse
+    {
+        $sub = Subscription::where('user_id', Auth::id())->where('id', $id)->first();
+
+        return $this->resourceShow(JsonResource::make($sub));
+    }
+
+    /**
+     * @param SubscriptionsStoreRequest $request
+     * @param mixed $id
+     *
+     * @return JsonResponse
+     */
+    public function update($id, SubscriptionsStoreRequest $request): JsonResponse
+    {
+        $sub = Subscription::where('user_id', Auth::id())->where('id', $id)->firstOrFail();
+
+        $sub->update($request->validated());
+
+        return $this->resourceStored(JsonResource::make($sub));
+    }
+
+    /**
      * @param SubscriptionsStoreRequest $request
      *
      * @return JsonResponse
@@ -46,7 +72,8 @@ final class SubscriptionsController extends ApiController
             'amount' => $request->integer('amount'),
             'currency' => 1,
             'start_at' => $request->inputAsDate('start_at'),
-
+            'period' => $request->input('period'),
+            'pan' => $request->input('pan'),
         ]);
 
         return $this->resourceStored(JsonResource::make($sub));

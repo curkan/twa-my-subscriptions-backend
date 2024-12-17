@@ -29,6 +29,7 @@ class User extends UserModel
         'username',
         'language_code',
         'allows_write_to_pm',
+        'notify_to_bot',
     ];
 
     /**

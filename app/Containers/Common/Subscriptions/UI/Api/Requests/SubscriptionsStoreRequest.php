@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Containers\Common\Subscriptions\UI\Api\Requests;
 
+use App\Ship\Parents\Enums\Subscription\SubscriptionPeriodEnum;
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Validation\Rule;
+use Str;
 
 /**
  * @OA\RequestBody(
@@ -44,6 +47,16 @@ final class SubscriptionsStoreRequest extends Request
             'amount' => 'required|integer',
             'start_at' => 'required|sometimes',
             'url' => 'sometimes',
+            'period' => Rule::in(SubscriptionPeriodEnum::values()),
+            'pan' => 'integer',
         ];
+    }
+
+    /**
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge(['period' => Str::lower($this->input('period'))]);
     }
 }

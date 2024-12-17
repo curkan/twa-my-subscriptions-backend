@@ -14,6 +14,8 @@ class Subscription extends Model
         'amount',
         'currency',
         'start_at',
+        'pan',
+        'period',
     ];
 
     /**
